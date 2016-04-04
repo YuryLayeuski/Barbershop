@@ -4,9 +4,10 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 def get_db
-	return SQLite3::Database.new 'barbershop.db'
+	db = SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
+	return db
 end
-
 
 configure do
 	db = get_db
@@ -74,6 +75,9 @@ end
 	erb "OK!, username is #{@username}, #{@phone}, Your date is #{@datetime}, Your barber is: #{@barber}, #{@color}"
 end
 
+get '/showusers' do
+  erb :"Hello World"
+end
 
 
 
