@@ -1,4 +1,4 @@
-Ruby_24
+Barbershop
 ====================
 
-Repository 24
+Barbershop
