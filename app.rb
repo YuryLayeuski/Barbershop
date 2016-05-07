@@ -88,8 +88,7 @@ hh.each do |key, value|
 end
 
 	db = get_db
-	db.execute 'INSERT INTO
-		 Users 
+	db.execute 'INSERT INTO Users 
 		 (
 		 	username,
 		 	phone,
@@ -99,7 +98,7 @@ end
 		 )
 		 values ( ?, ?, ?, ?, ? )', [@username, @phone, @datetime, @barber, @color]
 
-	erb "OK!, username is #{@username}, #{@phone}, Your date is #{@datetime}, Your barber is: #{@barber}, #{@color}"
+	erb "<h2> You are registered! </h2>"
 end
 
 get '/showusers' do
@@ -109,3 +108,8 @@ get '/showusers' do
 	
 	erb :showusers
 end
+
+
+
+
+
