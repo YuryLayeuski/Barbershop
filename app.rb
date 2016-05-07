@@ -9,7 +9,7 @@ end
 
 def seed_db db, barbers 
 	barbers.each do |barber|
-		if !is_barber_exists? db, 
+		if !is_barber_exists? db, barber
 			db.execute 'insert into Barbers (name) values (?)', [barber]
 		end
 	end
@@ -21,9 +21,14 @@ def get_db
 	return db
 end
 
+before do 
+	db = get_db
+	@barbers = db.execute 'select * from Barbers'
+end
+
 configure do
 	db = get_db
-	db.execute 'CREATE  TABLE IF NOT EXISTS
+	db.execute 'CREATE TABLE IF NOT EXISTS
 		 "Users" 
 		 (
 		 	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,14 +39,14 @@ configure do
 		 	 "color" TEXT
 		 )'
 
-		 db.execute 'CREATE  TABLE IF NOT EXISTS
+	db.execute 'CREATE  TABLE IF NOT EXISTS
 		 "Barbers" 
 		 (
 		 	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
 		 	 "name" TEXT
 		 )'
 
-		 seed_db db, ['Jessie Pinkman', 'Mike Johnson', 'Gus Frik', 'Hector Salamon']
+	seed_db db, ['Jessie Pinkman', 'Mike Johnson', 'Gus Frik', 'Hector Salamon']
 end
 
 
@@ -104,15 +109,3 @@ get '/showusers' do
 	
 	erb :showusers
 end
-
-
-
-
-
-
-
-
-
-
-
-
